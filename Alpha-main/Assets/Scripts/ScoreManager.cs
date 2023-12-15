@@ -1,15 +1,15 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager instance;
-    public Text scoreText;
+    public TextMeshProUGUI scoreText;    
     private int score = 0;
 
     void Awake()
     {
-        // Singleton pattern to ensure only one ScoreManager exists
         if (instance == null)
             instance = this;
         else
@@ -35,9 +35,7 @@ public class ScoreManager : MonoBehaviour
 
     public void GameOver()
     {
-        // Implement game over logic here
         Debug.Log("Game Over!");
-        // For example, disable player controls, show a game over screen, etc.
+        // Implement game over logic here
     }
 }
-

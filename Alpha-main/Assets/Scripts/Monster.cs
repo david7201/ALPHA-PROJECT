@@ -2,37 +2,48 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
-    // Define an event for when the monster is destroyed
-    // Define an event for when the monster is destroyed
-    public event System.Action MonsterDestroyed;
+    // Flag to track if the monster was destroyed by a capsule
+    private bool destroyedByCapsule = false;
+
+    private void Start()
+    {
+        // Set the spaceship rotation to 90 degrees on the X axis
+        transform.eulerAngles = new Vector3(90f, 0f, 0f);
+
+        // Fix the spaceship's Z position to 0
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        // Check if the colliding object is either the player or a capsule
-        if (other.CompareTag("Player") || other.CompareTag("Capsule"))
+        // Check if the monster is hit by a capsule
+        if (other.CompareTag("Capsule"))
         {
-            DestroyMonster();
+            destroyedByCapsule = true;
+            ScoreManager.instance.AddScore(10); // Add score
+            DestroyMonster(); // Destroy the monster
+        }
+        // Check if the monster collides with the player
+        else if (other.CompareTag("Player"))
+        {
+            ScoreManager.instance.GameOver(); // Game over
+            Destroy(other.gameObject); // Destroy the player
         }
     }
 
     // Call this method when the monster is destroyed
     public void DestroyMonster()
     {
-        // Perform any cleanup or additional logic here
-
-        // Raise the MonsterDestroyed event
-        MonsterDestroyed?.Invoke();
-
         // Destroy the GameObject
         Destroy(gameObject);
     }
-    void Start()
-{
-    // Set the spaceship rotation to 90 degrees on the X axis
-    transform.eulerAngles = new Vector3(90f, 0f, 0f);
 
-    // Fix the spaceship's Z position to 0
-    transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
-}
-
+    void OnDestroy()
+    {
+        // Subtract score if the monster was not destroyed by a capsule
+        if (!destroyedByCapsule)
+        {
+            ScoreManager.instance.SubtractScore(5);
+        }
+    }
 }

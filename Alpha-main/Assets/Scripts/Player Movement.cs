@@ -48,4 +48,13 @@ public class PlayerMovement : MonoBehaviour
     // Update the player's position after clamping
     transform.position = new Vector3(clampedX, clampedY, 0f);
 }
+
+void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Monster"))
+        {
+            ScoreManager.instance.GameOver(); // Game over
+            Destroy(gameObject); // Destroy the player
+        }
+    }
 }
