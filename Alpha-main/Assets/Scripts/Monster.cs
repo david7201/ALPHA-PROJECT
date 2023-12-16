@@ -4,9 +4,11 @@ public class Monster : MonoBehaviour
 {
     // Flag to track if the monster was destroyed by a capsule
     private bool destroyedByCapsule = false;
+    private int health;
 
     private void Start()
     {
+
         // Set the spaceship rotation to 90 degrees on the X axis
         transform.eulerAngles = new Vector3(90f, 0f, 0f);
 
@@ -14,22 +16,43 @@ public class Monster : MonoBehaviour
         transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void InitializeHealth(int initialHealth)
     {
-        // Check if the monster is hit by a capsule
-        if (other.CompareTag("Capsule"))
+        health = initialHealth;
+    }
+
+    private void OnTriggerEnter(Collider other)
+{
+    if (other.CompareTag("Capsule"))
+    {
+        health--; // Decrement health when hit by a capsule
+        Debug.Log(gameObject.name + " hit! Health now: " + health);
+
+        if (health <= 0)
         {
-            destroyedByCapsule = true;
-            ScoreManager.instance.AddScore(10); // Add score
-            DestroyMonster(); // Destroy the monster
-        }
-        // Check if the monster collides with the player
-        else if (other.CompareTag("Player"))
-        {
-            ScoreManager.instance.GameOver(); // Game over
-            Destroy(other.gameObject); // Destroy the player
+            Debug.Log(gameObject.name + " destroyed!");
+            destroyedByCapsule = true; // Flag that it was hit by a capsule
+            ScoreManager.instance.AddScore(10); // Add score only when monster is destroyed
+            Destroy(gameObject); // Destroy the monster if health is depleted
         }
     }
+    else if (other.CompareTag("Player"))
+    {
+        // Logic for what happens when a monster collides with the player
+        ScoreManager.instance.GameOver(); // Trigger game over
+        Destroy(other.gameObject); // Destroy the player
+    }
+    else if (other.CompareTag("Plane")) // Make sure the plane has this tag assigned
+    {
+        // If the monster collides with the plane, destroy the monster
+        Debug.Log(gameObject.name + " hit the plane and is being destroyed!");
+        Destroy(gameObject);
+    }
+}
+
+
+        
+    
 
     // Call this method when the monster is destroyed
     public void DestroyMonster()
@@ -46,4 +69,6 @@ public class Monster : MonoBehaviour
             ScoreManager.instance.SubtractScore(5);
         }
     }
+
+    
 }

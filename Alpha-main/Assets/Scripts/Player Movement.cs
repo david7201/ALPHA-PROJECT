@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
     public float minX = -11f;
     public float maxX = 14f;
 
+    public GameOverManager gameOverManager;
+
     void Start()
     {
         // Set the initial position of the player
@@ -55,6 +57,11 @@ void OnTriggerEnter(Collider other)
         {
             ScoreManager.instance.GameOver(); // Game over
             Destroy(gameObject); // Destroy the player
+        }
+
+        if (other.CompareTag("Monster"))
+        {
+            gameOverManager.ShowGameOver(); // Call the Game Over sequence
         }
     }
 }
