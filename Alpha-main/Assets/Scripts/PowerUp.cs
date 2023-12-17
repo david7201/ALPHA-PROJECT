@@ -4,15 +4,15 @@ public class PowerUpActivation : MonoBehaviour
 {
     void Start()
     {
-        Destroy(gameObject, 10f); // Destroy after 10 seconds
+        Destroy(gameObject, 10f); 
     }
 
-    private void OnTriggerEnter(Collider other) // Use OnTriggerEnter2D for 2D
+    private void OnTriggerEnter(Collider other) 
     {
         if (other.gameObject.CompareTag("Capsule"))
         {
             ActivatePowerUp();
-            Destroy(gameObject); // Destroy the power-up
+            Destroy(gameObject); 
         }
     }
 

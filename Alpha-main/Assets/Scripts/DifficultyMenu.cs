@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 
 public class DifficultyMenu : MonoBehaviour
 {
-    // Link the buttons from the Unity Editor
     public Button EasyButton;
     public Button MediumButton;
     public Button HardButton;
@@ -16,7 +15,6 @@ public class DifficultyMenu : MonoBehaviour
 
     void Start()
     {
-        // Add listeners to the buttons
         EasyButton.onClick.AddListener(OnEasyButtonClick);
         MediumButton.onClick.AddListener(OnMediumButtonClick);
         HardButton.onClick.AddListener(OnHardButtonClick);
@@ -26,14 +24,14 @@ public class DifficultyMenu : MonoBehaviour
     {
         Debug.Log("Easy difficulty selected!");
 
-        SceneManager.LoadScene("EasyGame"); // Load "MyGame" scene or perform actions related to Easy difficulty
+        SceneManager.LoadScene("EasyGame"); 
     }
 
     void OnMediumButtonClick()
     {
         Debug.Log("Medium difficulty selected!");
 
-        SceneManager.LoadScene("MediumGame"); // Load "MyGame" scene or perform actions related to Medium difficulty
+        SceneManager.LoadScene("MediumGame"); 
     }
 
     void OnHardButtonClick()

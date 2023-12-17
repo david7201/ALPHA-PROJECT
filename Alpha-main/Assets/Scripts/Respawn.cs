@@ -8,7 +8,8 @@ public class MonsterSpawner : MonoBehaviour
     public GameObject easyMonsterPrefab;
     public GameObject mediumMonsterPrefab;
     public GameObject hardMonsterPrefab;
-    public GameObject powerUpPrefab; // Assign your power-up prefab in the inspector
+    public GameObject powerUpPrefab; 
+    public YouWinManager youWinManager;
 
     // Configuration parameters
     public int initialMonstersToSpawn = 3;
@@ -62,6 +63,7 @@ public class MonsterSpawner : MonoBehaviour
     if (gameDifficulty != Difficulty.Hard && currentWave >= 5)
     {
         Debug.Log("Finished Spawning Monsters");
+        youWinManager.ShowYouWinScreen(true);
         // Game finish logic or transition to another scene could be added here
     }
     else

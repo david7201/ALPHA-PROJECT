@@ -13,8 +13,8 @@ public class DestroyMonsterOnCollision : MonoBehaviour
         {
            if (gameObject.CompareTag("Monster"))
             {
-                OnDestroyed?.Invoke(gameObject); // Notify about the destruction of the monster
-                Destroy(gameObject); // Destroy the object with the "Monster" tag
+                OnDestroyed?.Invoke(gameObject); 
+                Destroy(gameObject); 
            }
         }
     }

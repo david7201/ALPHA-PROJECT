@@ -7,6 +7,9 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager instance;
     public TextMeshProUGUI scoreText;    
     private int score = 0;
+    public GameObject gameOverPanel;
+
+    
 
     void Awake()
     {
@@ -36,6 +39,6 @@ public class ScoreManager : MonoBehaviour
     public void GameOver()
     {
         Debug.Log("Game Over!");
-        // Implement game over logic here
+        gameOverPanel.SetActive(true);
     }
 }

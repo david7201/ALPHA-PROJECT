@@ -4,21 +4,20 @@ public class DifficultyManager : MonoBehaviour
 {
     public static DifficultyManager instance;
 
-    public int monsterHealth = 1; // Default health for monsters
-    public bool infiniteWaves = false; // Should waves be infinite
+    public int monsterHealth = 1; 
+    public bool infiniteWaves = false; 
 
     void Awake()
     {
         if (instance != null && instance != this)
         {
-            Destroy(gameObject); // Ensures there is only one instance
+            Destroy(gameObject); 
         }
         else
         {
             instance = this;
-            DontDestroyOnLoad(gameObject); // Makes this object persistent across scene changes
+            DontDestroyOnLoad(gameObject); 
         }
     }
     
-    // Add any other methods related to difficulty settings here
 }
