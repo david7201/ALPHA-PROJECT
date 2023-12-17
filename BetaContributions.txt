@@ -1,0 +1,69 @@
+(Everything said in the video is in this document)
+
+Interactive Multimedia, 40% Final Version
+
+Group Members:
+
+Josip Curic – B00151073(Group7)
+
+David Cirlan – B00154375(Group6)
+
+Dominion Abagha – B00151868(Group6)
+
+Team Contribution:
+
+David Cirlan:
+
+Wave Manager script - It creates a type of monster over time, with each wave having more monsters. The monsters appear at random spots within a certain area. If the game is set for endless waves, it keeps making waves, creating a dynamic and challenging gameplay. The code uses Unity features to handle this smoothly.
+
+Power Up script - PowerUpActivation, manages a power-up that disappears after 10 seconds. When the power-up collides with an object labelled "Capsule," it boosts the player's shooting ability to a triple shot. The power-up is then removed. The script makes the game more interesting by giving the player a temporary shooting upgrade.
+
+Move script - makes an object smoothly move forward along the z-axis. It gradually increases its position on the z-axis over time, creating a simple and continuous motion effect.
+
+Player Shooting - PlayerShooting, handles the player's shooting mechanics. Pressing the space key triggers, the shooting function, creating a projectile. If the triple shot power-up is active, three projectiles are generated in a spread pattern; otherwise, a single projectile is fired. The projectiles move upward with a set force and disappear after a certain time. The script also includes functions to activate and deactivate the triple shot power-up.
+
+Difficulty Manager script - DifficultyManager, oversees the game's difficulty settings, including monster health and whether there are infinite waves. It ensures a single instance of the manager persists across scenes, maintaining consistent difficulty throughout the game. The script serves as a centralized control for managing difficulty-related variables.
+
+You Win script - YouWinManager, manages actions for winning the game. It includes a function to load the main menu scene and another to show or hide the "You Win" screen. The script provides simple functionality for transitioning to the main menu after winning and controlling the visibility of the victory screen.
+
+Dominion Abagha:
+
+Score Manager script - ScoreManager, takes care of the game's scoring system. It uses TextMeshPro to display the score. The script ensures there's only one instance of the manager. You can add or subtract points, and the score is automatically updated on the screen. The script also includes a simple "Game Over" message in the console.
+
+Player Movement script - PlayerMovement, manages the player's movement within set boundaries. It disables gravity and rotation while keeping the player within specified limits. The player can move using arrow keys or a joystick. If the player collides with a "Monster," it triggers a game over state by calling functions from the ScoreManager and GameOverManager. The script efficiently handles player movement and collision events.
+
+Scene Loader script - SceneLoader, provides a simple function to load a scene by name. When the LoadSceneByName function is called with a specified scene name, it uses Unity's SceneManager to load that particular scene. This script is useful for transitioning between different scenes in a game.
+
+Game Over script - GameOverManager, simply makes the game over text visible on the screen when the ShowGameOver function is called. It also freezes the game by setting the time scale to 0, signaling the end of the game.
+
+Medium Wave Manager script - MediumWaveManager, handles the spawning of medium-level monsters and power-ups in waves. It uses coroutines to spawn waves with increasing difficulty, dropping power-ups every even wave. The process continues until a specified number of waves are completed, and a "You
+Win" screen is displayed. The script adds dynamic challenges to the game by gradually increasing the number of monsters and introducing power-ups.
+
+Background Music --- The Unity script BackgroundMusic ensures that when the GameObject it's attached to becomes active, it retrieves the AudioSource component and immediately starts playing the associated background music.
+
+
+
+Josip Curic:
+
+Respawn Script - MonsterSpawner, handles the spawning of monsters in waves with varying difficulty levels. It includes the instantiation of different monster prefabs and a power-up prefab. Monsters are spawned at intervals based on the specified difficulty, and power-ups drop on every even wave. The script ensures minimum spawn distances between monsters and keeps track of their positions to avoid clustering. The spawning process continues until a certain wave or difficulty level is reached. The script also sets the initial health of the spawned monsters based on the chosen difficulty. Overall, it provides a structured and dynamic monster spawning system for the game.
+
+Monster Script - Monster, handles the behaviour of monsters in the game. When a monster is initialized, its rotation is adjusted, and it's positioned in the game. The script responds to collisions with different objects: if hit by a "Capsule," the monster's health decreases, and if it reaches zero, the monster is destroyed, adding points to the score. Colliding with the "Player" triggers a game over, while colliding with a "Plane" results in the monster's destruction.
+
+The script also manages the destruction of the monster and subtracts points from the score if it wasn't destroyed by a "Capsule."
+
+Object Spawner script - ObjectRespawner, brings an object back to life after a certain time. You can set the object to respawn and how long it takes. The script takes care of the respawning process automatically when the game starts and whenever you call the RespawnObject function.
+
+Difficulty Menu script - DifficultyMenu, controls the difficulty menu in the game. It has buttons for easy, medium, and hard difficulty levels. Clicking a button logs the selected difficulty and loads the corresponding scene. The script provides a straightforward interface for players to choose the game difficulty.
+
+Overall all team members contributed equally towards completing this project by meeting in person (library) and helping each other complete their own tasks.
+
+
+
+
+
+
+
+
+
+
+
