@@ -4,15 +4,18 @@ using UnityEngine;
 public class PlayerShooting : MonoBehaviour
 {
     public GameObject projectilePrefab; 
-    public Transform firePoint; 
+    public Transform firePoint;
     public float projectileForce = 20f;
     public bool isTripleShotActive = false; 
+
+    public AudioSource shootingAudioSource; 
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Shoot(); 
+            PlayShootingSound(); 
         }
     }
 
@@ -33,12 +36,20 @@ public class PlayerShooting : MonoBehaviour
     void CreateProjectile(Vector3 offset)
     {
         GameObject newProjectile = Instantiate(projectilePrefab, firePoint.position + offset, firePoint.rotation);
-        
+
         Rigidbody projectileRigidbody = newProjectile.GetComponent<Rigidbody>();
-        
+
         projectileRigidbody.AddForce(Vector3.up * projectileForce, ForceMode.Impulse);
-        
+
         Destroy(newProjectile, 3f);
+    }
+
+    void PlayShootingSound()
+    {
+        if (shootingAudioSource != null)
+        {
+            shootingAudioSource.Play(); 
+        }
     }
 
     public void ActivateTripleShot()
@@ -49,8 +60,7 @@ public class PlayerShooting : MonoBehaviour
 
     private IEnumerator DeactivateTripleShot()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(10f); 
         isTripleShotActive = false;
     }
-    
 }

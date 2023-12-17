@@ -9,6 +9,6 @@ public class GameOverManager : MonoBehaviour
     public void ShowGameOver()
     {
         gameOverText.SetActive(true); 
-        Time.timeScale = 0f; 
+        
     }
 }
