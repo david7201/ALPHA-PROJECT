@@ -6,6 +6,8 @@ public class GameOverManager : MonoBehaviour
 {
     public GameObject gameOverText; 
 
+    
+
     public void ShowGameOver()
     {
         gameOverText.SetActive(true); 

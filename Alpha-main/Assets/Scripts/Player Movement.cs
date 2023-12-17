@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 5f; 
+    public float moveSpeed = 5f;
 
     public float minY = -9f;
     public float maxY = 3f;
@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public float maxX = 14f;
 
     public GameOverManager gameOverManager;
+    public AudioSource gameOverAudio; 
 
     void Start()
     {
@@ -27,31 +28,36 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void MovePlayer()
-{
-    float horizontalInput = Input.GetAxisRaw("Horizontal");
-    float verticalInput = Input.GetAxisRaw("Vertical");
+    {
+        float horizontalInput = Input.GetAxisRaw("Horizontal");
+        float verticalInput = Input.GetAxisRaw("Vertical");
 
-    Vector3 movement = new Vector3(horizontalInput, verticalInput, 0f).normalized;
+        Vector3 movement = new Vector3(horizontalInput, verticalInput, 0f).normalized;
 
-    transform.position += movement * moveSpeed * Time.deltaTime;
+        transform.position += movement * moveSpeed * Time.deltaTime;
 
-    float clampedX = Mathf.Clamp(transform.position.x, minX, maxX);
-    float clampedY = Mathf.Clamp(transform.position.y, minY, maxY);
+        float clampedX = Mathf.Clamp(transform.position.x, minX, maxX);
+        float clampedY = Mathf.Clamp(transform.position.y, minY, maxY);
 
-    transform.position = new Vector3(clampedX, clampedY, 0f);
-}
+        transform.position = new Vector3(clampedX, clampedY, 0f);
+    }
 
-void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Monster"))
         {
-            ScoreManager.instance.GameOver(); 
-            Destroy(gameObject); 
-        }
+            PlayGameOverSound();
 
-        if (other.CompareTag("Monster"))
+            ScoreManager.instance.GameOver();
+            Destroy(gameObject);
+        }
+    }
+
+    void PlayGameOverSound()
+    {
+        if (gameOverAudio != null)
         {
-            gameOverManager.ShowGameOver(); 
+            gameOverAudio.Play();
         }
     }
 }
